@@ -58,7 +58,7 @@ public class OptionMenu {
 
 				switch (selection) {
 				case 1:
-					chooseCheckingAccount();
+					chooseCheckingAccount(acc);
 					break;
 				case 2:
 					getSaving(acc);
@@ -81,7 +81,7 @@ public class OptionMenu {
 			}
 		}
 	}
-	public int chooseCheckingAccount(){
+	public void chooseCheckingAccount(Account acc){
 		//should print out all checking accounts with num
 		//give option to choose which checking you want
 		System.out.println("Which checking account would you like?");
@@ -90,11 +90,13 @@ public class OptionMenu {
 
 		}
 		int selection = menuInput.nextInt();
+		getChecking(acc, selection-1);
 
-		return selection;
+
 	}
 
-	public void getChecking(Account acc) {
+
+	public void getChecking(Account acc, int indexOfAccount) {
 		boolean end = false;
 		while (!end) {
 			try {
@@ -110,7 +112,7 @@ public class OptionMenu {
 
 				switch (selection) {
 				case 1:
-					System.out.println("\nChecking Account Balance: " + moneyFormat.format(acc.getCheckingBalance()));
+					System.out.println("\nChecking Account Balance: " + moneyFormat.format(acc.getCheckingBalance(indexOfAccount)));
 					break;
 				case 2:
 					acc.getCheckingWithdrawInput();

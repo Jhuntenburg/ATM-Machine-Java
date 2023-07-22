@@ -81,50 +81,50 @@ public class Account {
         return checkingAccounts.get(index);
     }
 
-    public double getSavingBalance() {
-        return savingBalance;
+    public double getSavingBalance(int index) {
+        return savingsAccounts.get(index);
     }
 
-    public double calcCheckingWithdraw(double amount) {
-        checkingBalance = (checkingBalance - amount);
-        return checkingBalance;
+    public double calcCheckingWithdraw(double amount, int index) {
+        checkingAccounts.set(index, checkingAccounts.get(index) - amount);
+        return checkingAccounts.get(index);
     }
 
-    public double calcSavingWithdraw(double amount) {
-        savingBalance = (savingBalance - amount);
-        return savingBalance;
+    public double calcSavingWithdraw(double amount, int index) {
+        savingsAccounts.set(index, savingsAccounts.get(index)- amount);
+        return savingsAccounts.get(index);
     }
 
-    public double calcCheckingDeposit(double amount) {
-        checkingBalance = (checkingBalance + amount);
-        return checkingBalance;
+    public double calcCheckingDeposit(double amount,int index) {
+        checkingAccounts.set(index, checkingAccounts.get(index) + amount);
+        return checkingAccounts.get(index);
     }
 
-    public double calcSavingDeposit(double amount) {
-        savingBalance = (savingBalance + amount);
-        return savingBalance;
+    public double calcSavingDeposit(double amount,int index) {
+        savingsAccounts.set(index, savingsAccounts.get(index)+ amount);
+        return savingsAccounts.get(index);
     }
 
-    public void calcCheckTransfer(double amount) {
-        checkingBalance = checkingBalance - amount;
-        savingBalance = savingBalance + amount;
+    public void calcCheckTransfer(double amount, int index) {
+        checkingAccounts.set(index, checkingAccounts.get(index) - amount);
+        savingsAccounts.set(index, savingsAccounts.get(index)+ amount);
     }
 
-    public void calcSavingTransfer(double amount) {
-        savingBalance = savingBalance - amount;
-        checkingBalance = checkingBalance + amount;
+    public void calcSavingTransfer(double amount, int index) {
+        savingsAccounts.set(index, savingsAccounts.get(index)- amount);
+        checkingAccounts.set(index, checkingAccounts.get(index) + amount);
     }
 
-    public void getCheckingWithdrawInput() {
+    public void getCheckingWithdrawInput(int index) {
         boolean end = false;
         while (!end) {
             try {
-                System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingBalance));
+                System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingAccounts.get(index)));
                 System.out.print("\nAmount you want to withdraw from Checking Account: ");
                 double amount = input.nextDouble();
-                if ((checkingBalance - amount) >= 0 && amount >= 0) {
-                    calcCheckingWithdraw(amount);
-                    System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingBalance));
+                if ((checkingAccounts.get(index) - amount) >= 0 && amount >= 0) {
+                    calcCheckingWithdraw(amount, index);
+                    System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingAccounts.get(index)));
                     end = true;
                 } else {
                     System.out.println("\nBalance Cannot be Negative.");
@@ -136,16 +136,16 @@ public class Account {
         }
     }
 
-    public void getsavingWithdrawInput() {
+    public void getsavingWithdrawInput(int index) {
         boolean end = false;
         while (!end) {
             try {
-                System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingBalance));
+                System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingsAccounts.get(index)));
                 System.out.print("\nAmount you want to withdraw from Savings Account: ");
                 double amount = input.nextDouble();
-                if ((savingBalance - amount) >= 0 && amount >= 0) {
-                    calcSavingWithdraw(amount);
-                    System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingBalance));
+                if ((savingsAccounts.get(index) - amount) >= 0 && amount >= 0) {
+                    calcSavingWithdraw(amount, index);
+                    System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingsAccounts.get(index)));
                     end = true;
                 } else {
                     System.out.println("\nBalance Cannot Be Negative.");
@@ -157,16 +157,16 @@ public class Account {
         }
     }
 
-    public void getCheckingDepositInput() {
+    public void getCheckingDepositInput(int index) {
         boolean end = false;
         while (!end) {
             try {
-                System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingBalance));
+                System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingAccounts.get(index)));
                 System.out.print("\nAmount you want to deposit from Checking Account: ");
                 double amount = input.nextDouble();
-                if ((checkingBalance + amount) >= 0 && amount >= 0) {
-                    calcCheckingDeposit(amount);
-                    System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingBalance));
+                if ((checkingAccounts.get(index) + amount) >= 0 && amount >= 0) {
+                    calcCheckingDeposit(amount, index);
+                    System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingAccounts.get(index)));
                     end = true;
                 } else {
                     System.out.println("\nBalance Cannot Be Negative.");
@@ -178,17 +178,17 @@ public class Account {
         }
     }
 
-    public void getSavingDepositInput() {
+    public void getSavingDepositInput(int index) {
         boolean end = false;
         while (!end) {
             try {
-                System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingBalance));
+                System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingsAccounts.get(index)));
                 System.out.print("\nAmount you want to deposit into your Savings Account: ");
                 double amount = input.nextDouble();
 
-                if ((savingBalance + amount) >= 0 && amount >= 0) {
-                    calcSavingDeposit(amount);
-                    System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingBalance));
+                if ((savingsAccounts.get(index) + amount) >= 0 && amount >= 0) {
+                    calcSavingDeposit(amount, index);
+                    System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingsAccounts.get(index)));
                     end = true;
                 } else {
                     System.out.println("\nBalance Cannot Be Negative.");
@@ -200,7 +200,7 @@ public class Account {
         }
     }
 
-    public void getTransferInput(String accType) {
+    public void getTransferInput(String accType, int index) {
         boolean end = false;
         while (!end) {
             try {
@@ -212,14 +212,14 @@ public class Account {
                     int choice = input.nextInt();
                     switch (choice) {
                         case 1:
-                            System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingBalance));
+                            System.out.println("\nCurrent Checking Account Balance: " + moneyFormat.format(checkingAccounts.get(index)));
                             System.out.print("\nAmount you want to deposit into your Savings Account: ");
                             double amount = input.nextDouble();
-                            if ((savingBalance + amount) >= 0 && (checkingBalance - amount) >= 0 && amount >= 0) {
-                                calcCheckTransfer(amount);
-                                System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingBalance));
+                            if ((savingsAccounts.get(index) + amount) >= 0 && (checkingAccounts.get(index) - amount) >= 0 && amount >= 0) {
+                                calcCheckTransfer(amount, index);
+                                System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingsAccounts.get(index)));
                                 System.out.println(
-                                        "\nCurrent Checking Account Balance: " + moneyFormat.format(checkingBalance));
+                                        "\nCurrent Checking Account Balance: " + moneyFormat.format(checkingAccounts.get(index)));
                                 end = true;
                             } else {
                                 System.out.println("\nBalance Cannot Be Negative.");
@@ -239,13 +239,13 @@ public class Account {
                     int choice = input.nextInt();
                     switch (choice) {
                         case 1:
-                            System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingBalance));
+                            System.out.println("\nCurrent Savings Account Balance: " + moneyFormat.format(savingsAccounts.get(index)));
                             System.out.print("\nAmount you want to deposit into your savings account: ");
                             double amount = input.nextDouble();
-                            if ((checkingBalance + amount) >= 0 && (savingBalance - amount) >= 0 && amount >= 0) {
-                                calcSavingTransfer(amount);
-                                System.out.println("\nCurrent checking account balance: " + moneyFormat.format(checkingBalance));
-                                System.out.println("\nCurrent savings account balance: " + moneyFormat.format(savingBalance));
+                            if ((checkingAccounts.get(index) + amount) >= 0 && (savingsAccounts.get(index) - amount) >= 0 && amount >= 0) {
+                                calcSavingTransfer(amount, index);
+                                System.out.println("\nCurrent checking account balance: " + moneyFormat.format(checkingAccounts.get(index)));
+                                System.out.println("\nCurrent savings account balance: " + moneyFormat.format(savingsAccounts.get(index)));
                                 end = true;
                             } else {
                                 System.out.println("\nBalance Cannot Be Negative.");
