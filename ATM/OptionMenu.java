@@ -11,6 +11,8 @@ public class OptionMenu {
 	DecimalFormat moneyFormat = new DecimalFormat("'$'###,##0.00");
 	HashMap<Integer, Account> data = new HashMap<Integer, Account>();
 
+	int numberOfCheckingAccounts;
+
 	public void getLogin() throws IOException {
 		boolean end = false;
 		int customerNumber = 0;
@@ -42,6 +44,7 @@ public class OptionMenu {
 
 	public void getAccountType(Account acc) {
 		boolean end = false;
+		int index;
 		while (!end) {
 			try {
 				System.out.println("\nSelect the account you want to access: ");
@@ -55,7 +58,7 @@ public class OptionMenu {
 
 				switch (selection) {
 				case 1:
-					getChecking(acc);
+					chooseCheckingAccount();
 					break;
 				case 2:
 					getSaving(acc);
@@ -64,8 +67,8 @@ public class OptionMenu {
 					end = true;
 					break;
 				case 4:
-					System.out.println("\nChecking Account Balance: " + moneyFormat.format(acc.getCheckingBalance()));
-					System.out.println("\nSavings Account Balance: " + moneyFormat.format(acc.getSavingBalance()));
+					System.out.println("\nChecking Account Balance: " + moneyFormat.format(acc.getCheckingBalance(index)));
+					System.out.println("\nSavings Account Balance: " + moneyFormat.format(acc.getSavingBalance(index)));
 					break;
 
 
@@ -77,6 +80,18 @@ public class OptionMenu {
 				menuInput.next();
 			}
 		}
+	}
+	public int chooseCheckingAccount(){
+		//should print out all checking accounts with num
+		//give option to choose which checking you want
+		System.out.println("Which checking account would you like?");
+		for (int i = 0; i <numberOfCheckingAccounts ; i++) {
+			System.out.println("Checking account # "+ i+1);
+
+		}
+		int selection = menuInput.nextInt();
+
+		return selection;
 	}
 
 	public void getChecking(Account acc) {
@@ -182,7 +197,13 @@ public class OptionMenu {
 		}
 		System.out.println("\nEnter PIN to be registered");
 		int pin = menuInput.nextInt();
-		data.put(cst_no, new Account(cst_no, pin));
+
+		System.out.println("How many Checking accounts would you like?");
+		numberOfCheckingAccounts = menuInput.nextInt();
+		System.out.println("How many Savings accounts would you like?");
+		int numberOfSavingAccounts = menuInput.nextInt();
+
+		data.put(cst_no, new Account(cst_no, pin, numberOfCheckingAccounts, numberOfSavingAccounts));
 		System.out.println("\nYour new account has been successfuly registered!");
 		System.out.println("\nRedirecting to login.............");
 		getLogin();
