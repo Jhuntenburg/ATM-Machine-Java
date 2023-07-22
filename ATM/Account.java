@@ -35,11 +35,11 @@ public class Account {
 
         //this.checking account size == user input
         for (int i = 0; i < numberOfCheckingAccounts; i++) {
-            this.checkingAccounts.set(i, 0.0);
+            this.checkingAccounts.add(0.);
         }
 
         for (int i = 0; i < numberOfSavingAccounts; i++) {
-            this.savingsAccounts.set(i, 0.0);
+            this.savingsAccounts.add(0.);
 
         }
 

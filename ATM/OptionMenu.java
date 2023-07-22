@@ -12,6 +12,7 @@ public class OptionMenu {
 	HashMap<Integer, Account> data = new HashMap<Integer, Account>();
 
 	int numberOfCheckingAccounts;
+	int numberOfSavingAccounts;
 
 	public void getLogin() throws IOException {
 		boolean end = false;
@@ -61,14 +62,14 @@ public class OptionMenu {
 					chooseCheckingAccount(acc);
 					break;
 				case 2:
-					getSaving(acc);
+					chooseSavingsAccount(acc);
 					break;
 				case 3:
 					end = true;
 					break;
 				case 4:
-					System.out.println("\nChecking Account Balance: " + moneyFormat.format(acc.getCheckingBalance(index)));
-					System.out.println("\nSavings Account Balance: " + moneyFormat.format(acc.getSavingBalance(index)));
+//					System.out.println("\nChecking Account Balance: " + moneyFormat.format(acc.getCheckingBalance(index)));
+//					System.out.println("\nSavings Account Balance: " + moneyFormat.format(acc.getSavingBalance(index)));
 					break;
 
 
@@ -86,11 +87,11 @@ public class OptionMenu {
 		//give option to choose which checking you want
 		System.out.println("Which checking account would you like?");
 		for (int i = 0; i <numberOfCheckingAccounts ; i++) {
-			System.out.println("Checking account # "+ i+1);
+			System.out.println("Checking account # "+ i);
 
 		}
 		int selection = menuInput.nextInt();
-		getChecking(acc, selection-1);
+		getChecking(acc, selection);
 
 
 	}
@@ -115,14 +116,14 @@ public class OptionMenu {
 					System.out.println("\nChecking Account Balance: " + moneyFormat.format(acc.getCheckingBalance(indexOfAccount)));
 					break;
 				case 2:
-					acc.getCheckingWithdrawInput();
+					acc.getCheckingWithdrawInput(indexOfAccount);
 					break;
 				case 3:
-					acc.getCheckingDepositInput();
+					acc.getCheckingDepositInput(indexOfAccount);
 					break;
 
 				case 4:
-					acc.getTransferInput("Checking");
+					acc.getTransferInput("Checking", indexOfAccount);
 					break;
 				case 5:
 					end = true;
@@ -136,8 +137,20 @@ public class OptionMenu {
 			}
 		}
 	}
+	public void chooseSavingsAccount(Account acc){
+		//should print out all checking accounts with num
+		//give option to choose which checking you want
+		System.out.println("Which savings account would you like?");
+		for (int i = 0; i <numberOfSavingAccounts ; i++) {
+			System.out.println("Savings account # "+ i);
 
-	public void getSaving(Account acc) {
+		}
+		int selection = menuInput.nextInt();
+		getSaving(acc, selection);
+
+
+	}
+	public void getSaving(Account acc, int indexOfAccount) {
 		boolean end = false;
 		while (!end) {
 			try {
@@ -151,16 +164,16 @@ public class OptionMenu {
 				int selection = menuInput.nextInt();
 				switch (selection) {
 				case 1:
-					System.out.println("\nSavings Account Balance: " + moneyFormat.format(acc.getSavingBalance()));
+					System.out.println("\nSavings Account Balance: " + moneyFormat.format(acc.getSavingBalance(indexOfAccount)));
 					break;
 				case 2:
-					acc.getsavingWithdrawInput();
+					acc.getsavingWithdrawInput(indexOfAccount);
 					break;
 				case 3:
-					acc.getSavingDepositInput();
+					acc.getSavingDepositInput(indexOfAccount);
 					break;
 				case 4:
-					acc.getTransferInput("Savings");
+					acc.getTransferInput("Savings", indexOfAccount);
 					break;
 				case 5:
 					end = true;
@@ -203,7 +216,7 @@ public class OptionMenu {
 		System.out.println("How many Checking accounts would you like?");
 		numberOfCheckingAccounts = menuInput.nextInt();
 		System.out.println("How many Savings accounts would you like?");
-		int numberOfSavingAccounts = menuInput.nextInt();
+		numberOfSavingAccounts = menuInput.nextInt();
 
 		data.put(cst_no, new Account(cst_no, pin, numberOfCheckingAccounts, numberOfSavingAccounts));
 		System.out.println("\nYour new account has been successfuly registered!");
