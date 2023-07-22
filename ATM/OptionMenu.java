@@ -48,6 +48,7 @@ public class OptionMenu {
 				System.out.println(" Type 1 - Checking Account");
 				System.out.println(" Type 2 - Savings Account");
 				System.out.println(" Type 3 - Exit");
+				System.out.println(" Type 4 - Check all account Balances");
 				System.out.print("\nChoice: ");
 
 				int selection = menuInput.nextInt();
@@ -62,6 +63,12 @@ public class OptionMenu {
 				case 3:
 					end = true;
 					break;
+				case 4:
+					System.out.println("\nChecking Account Balance: " + moneyFormat.format(acc.getCheckingBalance()));
+					System.out.println("\nSavings Account Balance: " + moneyFormat.format(acc.getSavingBalance()));
+					break;
+
+
 				default:
 					System.out.println("\nInvalid Choice.");
 				}
